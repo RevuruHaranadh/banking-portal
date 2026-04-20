@@ -308,3 +308,225 @@ This project is actively being enhanced to match **enterprise banking standards*
 * Maintainability
 
 ---
+## 🧪 Testing Strategy & Test Cases
+
+This project follows a **developer-level testing approach** covering:
+
+* Backend API Testing
+* Business Logic Validation
+* Database Verification
+* Frontend Testing
+* End-to-End Testing
+
+---
+
+## 🔁 Testing Flow
+
+```text
+Backend → API Testing → Database → Frontend → End-to-End
+```
+
+---
+
+## 🔐 Authentication Module Test Cases
+
+### ✅ Register User
+
+#### Positive Case
+
+* Input: Valid full name, email, password
+* Expected: User registered successfully
+* DB Check: User record created
+
+#### Negative Cases
+
+* Duplicate email → "User already exists"
+* Invalid email format → Validation error
+* Empty fields → Validation error
+
+---
+
+### ✅ Login User
+
+#### Positive Case
+
+* Input: Valid email and password
+* Expected: JWT token returned
+
+#### Negative Cases
+
+* Wrong password → "Invalid email or password"
+* Email not found → Error response
+* Empty fields → Validation error
+
+#### Verification
+
+* Token stored in browser localStorage
+* Role returned correctly
+
+---
+
+## 💸 Transaction Module Test Cases
+
+### ✅ Fund Transfer
+
+#### Positive Case
+
+* Valid fromAccount, toAccount, amount
+* Expected: "Transfer successful"
+
+#### Verification
+
+* Sender balance reduced
+* Receiver balance increased
+* Transaction record created
+
+---
+
+### ❌ Negative Cases
+
+| Scenario               | Expected Result        |
+| ---------------------- | ---------------------- |
+| Insufficient balance   | "Insufficient balance" |
+| From account not found | "Account not found"    |
+| To account not found   | "Account not found"    |
+| Negative amount        | Validation error       |
+| Zero amount            | Validation error       |
+| Same account transfer  | Not allowed            |
+| Frozen account         | Transfer blocked       |
+
+---
+
+## 🗄️ Database Verification
+
+After successful transfer:
+
+```sql
+SELECT * FROM accounts;
+SELECT * FROM transactions;
+```
+
+### Expected:
+
+* Balance updated correctly
+* Transaction entry created
+
+---
+
+## 🌐 API Testing (Postman)
+
+### Register API
+
+```http
+POST /api/auth/register
+```
+
+### Login API
+
+```http
+POST /api/auth/login
+```
+
+### Transfer API
+
+```http
+POST /api/transactions/transfer
+Authorization: Bearer <token>
+```
+
+---
+
+## 💻 Frontend Testing
+
+### Login Page
+
+* Empty form → validation error
+* Valid login → redirect to dashboard
+* Invalid login → error message
+
+---
+
+### Register Page
+
+* Empty fields → validation error
+* Valid input → success response
+
+---
+
+### Transfer Page
+
+* Invalid input → error message
+* Valid transfer → success message
+
+---
+
+### Security Testing
+
+* Access dashboard without login → blocked
+* Token missing → API request denied
+* Token present → API works
+
+---
+
+## 🔄 End-to-End Test Scenarios
+
+### Scenario 1: Successful Flow
+
+1. Register user
+2. Login user
+3. Perform transfer
+4. Verify database
+
+---
+
+### Scenario 2: Invalid Transfer
+
+1. Login
+2. Enter high amount
+3. Expect failure message
+
+---
+
+### Scenario 3: Unauthorized Access
+
+1. Clear token
+2. Try accessing dashboard
+3. Redirect to login
+
+---
+
+## 🧠 Testing Coverage Summary
+
+| Layer           | Tested |
+| --------------- | ------ |
+| Backend APIs    | ✅      |
+| Business Logic  | ✅      |
+| Database        | ✅      |
+| Frontend UI     | ✅      |
+| Security        | ✅      |
+| End-to-End Flow | ✅      |
+
+---
+
+## 🚀 Future Testing Enhancements
+
+* JUnit & Mockito Unit Tests
+* Integration Testing
+* Angular Component Testing
+* API Automation
+* CI/CD Test Pipeline
+
+---
+
+## 💡 Developer Testing Approach
+
+For every feature:
+
+1. Validate correct input → success
+2. Validate wrong input → proper error
+3. Verify database consistency
+4. Ensure security rules are enforced
+
+---
+
+👉 This testing approach ensures the application behaves like a real-world banking system with proper validation, security, and data integrity.
