@@ -1,0 +1,22 @@
+<div class="dashboard">
+  <h1>Customer Dashboard</h1>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Account Summary</h3>
+      <p>View balance and account details</p>
+    </div>
+
+    <div class="card" routerLink="/transfer">
+      <h3>Fund Transfer</h3>
+      <p>Transfer money securely</p>
+    </div>
+
+    <div class="card">
+      <h3>Transactions</h3>
+      <p>View recent transaction history</p>
+    </div>
+  </div>
+
+  <button (click)="logout()">Logout</button>
+</div>

@@ -1,0 +1,14 @@
+<div class="transfer-container">
+  <div class="transfer-card">
+    <h2>Transfer Funds</h2>
+
+    <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+      <input type="text" placeholder="From Account Number" formControlName="fromAccountNumber" />
+      <input type="text" placeholder="To Account Number" formControlName="toAccountNumber" />
+      <input type="number" placeholder="Amount" formControlName="amount" />
+      <button type="submit">Transfer</button>
+    </form>
+
+    <p>{{ message }}</p>
+  </div>
+</div>
