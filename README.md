@@ -1,124 +1,310 @@
-# 🏦 Banking Portal
-
-A full-stack banking application built using **Spring Boot (Backend)** and **Angular (Frontend)**.
-
+# 🏦 Banking Portal (Enterprise-Style Full Stack Project)
 ---
 
 ## 📌 Project Overview
 
-This project simulates a retail banking portal where users can:
+This project is a **Retail Banking Customer Portal** built using **Spring Boot (Backend)** and **Angular (Frontend)**.
 
-- Register new account
-- Login securely
-- Access dashboard
-- Perform fund transfers between accounts
+It simulates real-world banking operations such as:
+
+* Customer onboarding (Register/Login)
+* Secure authentication
+* Dashboard access
+* Fund transfers between accounts
+* Transaction processing
+
+This project is being enhanced toward **enterprise-grade banking architecture**, similar to systems used in financial institutions like **Barclays**.
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+Frontend (Angular)
+        ↓
+HTTP Requests (REST API)
+        ↓
+Backend (Spring Boot)
+        ↓
+Service Layer (Business Logic)
+        ↓
+Repository Layer (JPA)
+        ↓
+MySQL Database
+```
+
+### 🔐 Security Flow
+
+```
+Login → JWT Token Generated → Stored in LocalStorage
+       ↓
+Interceptor adds token to API calls
+       ↓
+Backend validates token
+       ↓
+Access granted to protected routes
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-- Java
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- MySQL
-- Maven
+
+* Java 17
+* Spring Boot
+* Spring Security
+* Spring Data JPA
+* Hibernate
+* MySQL
+* Maven
 
 ### Frontend
-- Angular
-- TypeScript
-- HTML
-- CSS
-- Reactive Forms
+
+* Angular
+* TypeScript
+* HTML
+* CSS
+* Reactive Forms
+
+### Tools
+
+* Git & GitHub
+* IntelliJ IDEA
+* VS Code
+* MySQL Workbench
 
 ---
 
 ## 📁 Project Structure
+
+```
 banking-portal/
 ├── backend/
+│   ├── controller/
+│   ├── service/
+│   ├── repository/
+│   ├── entity/
+│   ├── security/
+│   └── config/
+│
 ├── frontend/
+│   ├── src/app/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── guards/
+│   │   ├── interceptors/
+│   │   └── components/
+│
 ├── docs/
 ├── .gitignore
 └── README.md
+```
 
 ---
 
 ## 🚀 Features Implemented
 
-- ✅ User Registration
-- ✅ User Login
-- ✅ Dashboard UI
-- ✅ Fund Transfer
-- ✅ Angular Routing
-- ✅ Route Guards
-- ✅ HTTP Interceptors
-- ✅ MySQL Integration
+### ✅ Authentication
 
----
+* User Registration
+* User Login
+* JWT-based authentication
 
-## 🔮 Future Enhancements
+### ✅ Dashboard
 
-- Account Summary
-- Transaction History
-- Beneficiary Management
-- Admin Dashboard
-- Account Freeze / Unfreeze
-- Unit Testing
-- CI/CD Integration
+* User landing page after login
+
+### ✅ Transactions
+
+* Fund transfer between accounts
+
+### ✅ Frontend Features
+
+* Angular routing
+* Route guards (auth protection)
+* HTTP interceptor (token handling)
+* Reactive forms
+
+### ✅ Backend Features
+
+* Layered architecture
+* REST APIs
+* Exception handling
+* Database integration
 
 ---
 
 ## ⚙️ How to Run the Project
 
-### Backend Setup
+---
+
+### 🔧 Backend Setup
 
 1. Open `backend` in IntelliJ
-2. Configure MySQL in:
-    backend/src/main/resources/application.properties
-3. Run Spring Boot application
+2. Configure database in:
+
+```
+src/main/resources/application.properties
+```
+
+Example:
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/banking_portal
+spring.datasource.username=root
+spring.datasource.password=your_password
+```
+
+3. Run the Spring Boot application
+
+Backend runs on:
+
+```
+http://localhost:8080
+```
 
 ---
 
-### Frontend Setup
+### 💻 Frontend Setup
 
 1. Open `frontend` in VS Code
 2. Run:
+
 ```bash
 npm install
 ng serve
-3. Open in browser:
-    http://localhost:4200
+```
 
-🗄️ Database Setup
+3. Open browser:
 
-Create database in MySQL:
-        CREATE DATABASE banking_portal;
+```
+http://localhost:4200
+```
 
+---
 
-🔗 API Endpoints
-Auth APIs
+## 🗄️ Database Setup
+
+Run in MySQL:
+
+```sql
+CREATE DATABASE banking_portal;
+```
+
+---
+
+## 🔗 API Endpoints
+
+### 🔐 Auth APIs
+
+#### Register
+
+```
 POST /api/auth/register
+```
+
+#### Login
+
+```
 POST /api/auth/login
-Transaction APIs
+```
+
+---
+
+### 💸 Transaction APIs
+
+#### Transfer Money
+
+```
 POST /api/transactions/transfer
+```
 
-🧪 Testing Flow
-Register user
-Login user
-Insert sample accounts in DB
-Perform transfer
-Verify DB updates
-👨‍💻 Author
+Request:
 
-Haranadh
+```json
+{
+  "fromAccountNumber": "10001",
+  "toAccountNumber": "10002",
+  "amount": 500
+}
+```
 
-⭐ Notes
+---
 
-This project is being enhanced to enterprise-level standards with:
+## 🧪 Testing Flow
 
-Better architecture
-Security improvements
-Unit testing
-Real-world banking features
---------
+1. Register a user
+2. Login with credentials
+3. Insert sample accounts manually in DB
+4. Perform transfer
+5. Verify balances in database
+
+---
+
+## 📊 Business Rules Implemented
+
+* Account must exist for transfer
+* Sufficient balance required
+* No self-transfer allowed
+* Secure endpoints require authentication
+
+---
+
+## 🔮 Future Enhancements (Barclays-Level)
+
+* Account Summary Module
+* Transaction History with Filters
+* Beneficiary Management System
+* Admin Dashboard
+* Account Freeze / Unfreeze
+* Service Request Module
+* Role-Based Access Control
+* Audit Logging
+* Unit & Integration Testing
+* CI/CD Pipeline
+
+---
+
+## 🔧 Git Workflow Used
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git push -u origin main
+```
+
+### Feature Workflow
+
+```bash
+git switch -c feature/new-feature
+git add .
+git commit -m "Added new feature"
+git push origin feature/new-feature
+```
+
+---
+
+## 🧠 Key Learnings
+
+* Full-stack integration (Angular + Spring Boot)
+* REST API design
+* JWT authentication
+* Database design
+* Debugging real-world issues
+* Git workflow & version control
+
+---
+
+## ⭐ Final Note
+
+This project is actively being enhanced to match **enterprise banking standards**, focusing on:
+
+* Clean architecture
+* Security
+* Scalability
+* Maintainability
+
+---
